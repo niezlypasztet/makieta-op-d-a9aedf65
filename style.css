@@ -405,3 +405,6 @@ svg { flex: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Standalone links are at least 24px tall to tap (WCAG 2.5.8) */
+.why__list a, .facts dd a, .foot__cols a { display: inline-block; padding-block: 4px; }
