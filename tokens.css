@@ -1,0 +1,42 @@
+/* Optyk Piotrkowska, version D — design tokens.
+   Structure after Vision Express (white ground, one saturated brand colour
+   carrying the actions, a dark service strip); the colour is our own:
+   ultramarine, the blue of an optician's cleaning cloth and lens-coating
+   reflections, instead of Vision Express fuchsia. */
+
+:root {
+  --bg:         oklch(1 0 0);            /* #ffffff page */
+  --surface:    oklch(0.967 0.006 265);  /* #f2f4f9 panels, tiles, inputs */
+  --surface-2:  oklch(0.93 0.02 268);    /* #e3e8f6 hovered rows, chips */
+  --text:       oklch(0.2 0.02 265);     /* #161a26 body text */
+  --text-muted: oklch(0.45 0.02 265);    /* #545b6b secondary text */
+  --primary:    oklch(0.45 0.21 266);    /* #2440c4 ultramarine: actions, links */
+  --primary-hi: oklch(0.38 0.19 266);    /* #1b329f hover */
+  --on-primary: oklch(1 0 0);            /* #ffffff */
+  --accent:     oklch(0.86 0.16 92);     /* #f2cd3c lens-wipe yellow, one highlight per screen */
+  --on-accent:  oklch(0.2 0.02 265);
+  --strip:      oklch(0.24 0.02 265);    /* #1d2230 dark service strip, footer */
+  --on-strip:   oklch(0.97 0 0);
+  --border:     oklch(0.6 0.015 265);    /* #828896 input outlines (3:1) */
+  --divider:    oklch(0.9 0.008 265);    /* #e0e2e8 hairlines, decorative only */
+  --focus:      oklch(0.45 0.21 266);
+  --success:    oklch(0.5 0.13 150);
+  --warning:    oklch(0.62 0.15 70);
+  --danger:     oklch(0.52 0.19 27);
+
+  --font: "Lexend", "Helvetica Neue", Arial, sans-serif;
+  --step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --step-0:  clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);
+  --step-1:  clamp(1.125rem, 1.07rem + 0.25vw, 1.25rem);
+  --step-2:  clamp(1.375rem, 1.25rem + 0.55vw, 1.75rem);
+  --step-3:  clamp(1.75rem, 1.5rem + 1.1vw, 2.5rem);
+  --step-4:  clamp(2.125rem, 1.7rem + 1.9vw, 3.5rem);
+
+  --radius-s: 8px;
+  --radius:   14px;
+  --radius-l: 24px;
+  --pill:     999px;
+  --wrap: 1280px;
+  --gutter: clamp(16px, 3.5vw, 40px);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
