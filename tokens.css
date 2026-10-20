@@ -1,8 +1,11 @@
 /* Optyk Piotrkowska, version D — design tokens.
    Structure after Vision Express (white ground, one saturated brand colour
-   carrying the actions, a dark service strip); the colour is our own:
-   ultramarine, the blue of an optician's cleaning cloth and lens-coating
-   reflections, instead of Vision Express fuchsia. */
+   carrying the actions, a dark service strip); the colours are our own.
+   Three schemes, chosen by <html data-theme>:
+
+     ultramaryna  blue of lens-coating reflections (default)
+     turkus       the teal of the banner on optykpiotrkowska.pl (#149aaa)
+     zielen       bottle green                                            */
 
 :root {
   --bg:         oklch(1 0 0);            /* #ffffff page */
@@ -13,7 +16,10 @@
   --primary:    oklch(0.45 0.21 266);    /* #2440c4 ultramarine: actions, links */
   --primary-hi: oklch(0.38 0.19 266);    /* #1b329f hover */
   --on-primary: oklch(1 0 0);            /* #ffffff */
-  --accent:     oklch(0.86 0.16 92);     /* #f2cd3c lens-wipe yellow, one highlight per screen */
+  --banner:     var(--primary);          /* hero colour block */
+  --on-banner:  var(--on-primary);
+  --banner-lede: 300;                    /* lede weight on the banner */
+  --accent:     oklch(0.86 0.16 92);     /* #f2cd3c price seal, phone marquee; always a background */
   --on-accent:  oklch(0.2 0.02 265);
   --strip:      oklch(0.24 0.02 265);    /* #1d2230 dark service strip, footer */
   --on-strip:   oklch(0.97 0 0);
@@ -24,19 +30,55 @@
   --warning:    oklch(0.62 0.15 70);
   --danger:     oklch(0.52 0.19 27);
 
-  --font: "Lexend", "Helvetica Neue", Arial, sans-serif;
+  --font: "Poppins", "Helvetica Neue", Arial, sans-serif;
   --step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
-  --step-0:  clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);
+  --step-0:  1rem;
   --step-1:  clamp(1.125rem, 1.07rem + 0.25vw, 1.25rem);
   --step-2:  clamp(1.375rem, 1.25rem + 0.55vw, 1.75rem);
-  --step-3:  clamp(1.75rem, 1.5rem + 1.1vw, 2.5rem);
-  --step-4:  clamp(2.125rem, 1.7rem + 1.9vw, 3.5rem);
+  --step-3:  clamp(1.625rem, 1.4rem + 1vw, 2.375rem);
+  --step-4:  clamp(2rem, 1.6rem + 1.9vw, 3.5rem);
 
-  --radius-s: 8px;
-  --radius:   14px;
-  --radius-l: 24px;
+  --radius-s: 3px;
+  --radius:   12px;
+  --radius-l: 20px;
   --pill:     999px;
   --wrap: 1280px;
-  --gutter: clamp(16px, 3.5vw, 40px);
+  --gutter: clamp(16px, 2.5vw, 36px);
   --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Teal: the client's banner colour for the hero block; a darker teal carries
+   white button text at AA. White on #149aaa is 3.4:1, so banner text is bold
+   or large (WCAG large-text rule). */
+[data-theme="turkus"] {
+  --surface:    oklch(0.97 0.008 210);   /* #eff7f8 */
+  --surface-2:  oklch(0.93 0.03 205);    /* #d2eef1 */
+  --text:       oklch(0.21 0.02 230);    /* #0e1a20 */
+  --text-muted: oklch(0.45 0.02 225);    /* #4a585e */
+  --primary:    oklch(0.52 0.09 210);    /* #007785, 5.3:1 with white */
+  --primary-hi: oklch(0.45 0.08 212);    /* #00616f */
+  --banner:     #149aaa;                /* client banner, measured on optykpiotrkowska.pl */
+  --banner-lede: 600;
+  --accent:     oklch(0.87 0.14 85);     /* #fecd5c */
+  --on-accent:  oklch(0.21 0.02 230);
+  --strip:      oklch(0.26 0.03 220);    /* #12272e */
+  --border:     oklch(0.6 0.02 220);
+  --divider:    oklch(0.9 0.01 215);
+  --focus:      oklch(0.52 0.09 210);
+}
+
+/* Bottle green with a warm peach seal */
+[data-theme="zielen"] {
+  --surface:    oklch(0.97 0.008 160);   /* #f1f7f3 */
+  --surface-2:  oklch(0.93 0.03 160);    /* #d8eee1 */
+  --text:       oklch(0.21 0.02 165);    /* #0f1b16 */
+  --text-muted: oklch(0.45 0.02 165);    /* #4b5952 */
+  --primary:    oklch(0.46 0.08 163);    /* #25664b */
+  --primary-hi: oklch(0.39 0.07 163);    /* #19513a */
+  --accent:     oklch(0.82 0.11 60);     /* #f9b379 */
+  --on-accent:  oklch(0.21 0.02 165);
+  --strip:      oklch(0.25 0.025 165);   /* #16261f */
+  --border:     oklch(0.6 0.02 165);
+  --divider:    oklch(0.9 0.01 165);
+  --focus:      oklch(0.46 0.08 163);
 }

@@ -1,6 +1,6 @@
-// Optyk Piotrkowska, version D: mega menus, the mobile drawer and the booking bar.
-// Without this file every link still works: mega menus fall back to their
-// section anchors through the drawer markup, and the booking bar to its phone link.
+// Optyk Piotrkowska, version D: mega menus, the mobile drawer, the phone search,
+// the hero carousel and the booking bar. Without this file every link still
+// works: the carousel scrolls by swipe, the booking bar falls back to its phone link.
 
 const WIDE_MIN_PX = 1101;     // above this the desktop menu row shows
 
@@ -49,7 +49,8 @@ function initMega() {
   });
 }
 
-// 2. Drawer: a modal menu on narrow screens; the page behind is inert while it is open
+// 2. Drawer: a side panel on narrow screens; the page behind is inert while it is open.
+//    Rows with a submenu swap the list for that submenu; the back arrow returns.
 function initDrawer() {
   const burger = document.querySelector('.hdr__burger');
   const drawer = document.getElementById('drawer');
@@ -57,7 +58,16 @@ function initDrawer() {
     return;
   }
   const closeBtn = drawer.querySelector('.drawer__close');
-  const behind = [...document.querySelectorAll('main, .foot, .hdr, .guide, .skip')];
+  const backBtn = drawer.querySelector('.drawer__back');
+  const root = drawer.querySelector('[data-level="root"]');
+  const behind = [...document.querySelectorAll('main, .foot, .hdr, .guide, .skip, .strip, .marquee')];
+  let opener = null;
+
+  const showLevel = (level) => {
+    drawer.querySelectorAll('.drawer__level').forEach((el) => { el.hidden = el !== level; });
+    backBtn.hidden = level === root;
+    drawer.querySelector('.drawer__panel').scrollTop = 0;
+  };
   const set = (open) => {
     burger.setAttribute('aria-expanded', String(open));
     drawer.hidden = !open;
@@ -65,14 +75,30 @@ function initDrawer() {
     behind.forEach((el) => { el.inert = open; });
     if (open) {
       closeBtn.focus();
-    } else {
-      burger.focus();
+      return;
     }
+    showLevel(root);
+    burger.focus();
   };
+
   burger.addEventListener('click', () => set(true));
   closeBtn.addEventListener('click', () => set(false));
+  backBtn.addEventListener('click', () => {
+    showLevel(root);
+    if (opener) {
+      opener.focus();
+    }
+  });
   drawer.addEventListener('click', (e) => {
-    if (e.target.closest('a')) {
+    const row = e.target.closest('button[aria-controls]');
+    if (row) {
+      opener = row;
+      showLevel(document.getElementById(row.getAttribute('aria-controls')));
+      backBtn.focus();
+      return;
+    }
+    // A chosen link or a click on the dimmed page closes the panel
+    if (e.target.closest('a') || e.target === drawer) {
       set(false);
     }
   });
@@ -88,7 +114,60 @@ function initDrawer() {
   });
 }
 
-// 3. Booking bar: the chosen visit sets where the button goes and what it says
+// 3. Phone search: the magnifier shows the search field under the header row
+function initSearch() {
+  const toggle = document.querySelector('[data-search-toggle]');
+  if (!toggle) {
+    return;
+  }
+  const header = document.querySelector('.hdr');
+  toggle.addEventListener('click', () => {
+    const open = !header.classList.contains('hdr--search');
+    header.classList.toggle('hdr--search', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    if (open) {
+      document.getElementById('q').focus();
+    }
+  });
+}
+
+// 4. Hero carousel: dots and arrows scroll the track; the current dot follows
+//    the slide in view, whether it got there by swipe, dot or arrow.
+function initCarousel() {
+  document.querySelectorAll('.hero').forEach((hero) => {
+    const track = hero.querySelector('.hero__track');
+    const slides = [...track.children];
+    const dots = [...hero.querySelectorAll('.hero__dots button')];
+    const prev = hero.querySelector('.hero__arrow--prev');
+    const next = hero.querySelector('.hero__arrow--next');
+    let current = 0;
+
+    const go = (i) => {
+      const target = (i + slides.length) % slides.length;
+      track.scrollTo({ left: slides[target].offsetLeft - track.offsetLeft });
+    };
+    const mark = (i) => {
+      current = i;
+      dots.forEach((d, n) => d.setAttribute('aria-current', String(n === i)));
+    };
+
+    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+    prev.addEventListener('click', () => go(current - 1));
+    next.addEventListener('click', () => go(current + 1));
+    const seen = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          mark(slides.indexOf(e.target));
+        }
+      });
+    }, { root: track, threshold: 0.6 });
+    slides.forEach((s) => seen.observe(s));
+    // Controls are hidden in the markup so a page without JS shows no dead buttons
+    [prev, next, hero.querySelector('.hero__dots')].forEach((el) => { el.hidden = false; });
+  });
+}
+
+// 5. Booking bar: the chosen visit sets where the button goes and what it says
 function initBooking() {
   document.querySelectorAll('[data-book]').forEach((form) => {
     const select = form.querySelector('select');
@@ -114,4 +193,6 @@ function initBooking() {
 
 initMega();
 initDrawer();
+initSearch();
+initCarousel();
 initBooking();
