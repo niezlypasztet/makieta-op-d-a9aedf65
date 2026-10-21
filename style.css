@@ -324,6 +324,22 @@ svg { flex: none; }
 .cta-band p { font-weight: 300; }
 .size { font-size: var(--step-4); font-weight: 700; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
 
+/* About us: team cards, three per row, the last row centred */
+.crew { padding-block: 24px clamp(40px, 5vw, 64px); }
+.crew__head { display: grid; gap: 16px; max-width: 46em; margin-bottom: clamp(28px, 4vw, 48px); }
+.crew__head h1 { font-size: var(--step-4); font-weight: 700; letter-spacing: -.015em; }
+.crew__grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px 24px; }
+.crew__card { flex: 0 1 calc((100% - 48px) / 3); display: grid; grid-template-rows: auto 1fr; overflow: hidden; border-radius: var(--radius-l); background: var(--surface); }
+.crew__img { position: relative; }
+.crew__img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.crew__body { display: grid; gap: 10px; align-content: start; justify-items: start; padding: 22px 24px 26px; }
+.crew__name { font-size: var(--step-2); line-height: 1.2; }
+.crew__role { color: var(--primary); font-weight: 600; }
+.crew__does { display: flex; flex-wrap: wrap; gap: 6px; }
+.crew__does li { padding: 3px 12px; border-radius: var(--pill); background: var(--bg); font-size: .8125rem; }
+.crew__bio { color: var(--text-muted); font-size: var(--step--1); }
+.crew__body .btn { margin-top: 6px; }
+
 /* ---------- Footer ---------- */
 .foot { margin-top: clamp(56px, 7vw, 96px); background: var(--strip); color: var(--on-strip); }
 .foot__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 48px; padding-block: 56px 44px; }
@@ -371,6 +387,7 @@ main:has(> :last-child:is(.salon, .team, .band)) + .foot { margin-top: 0; }
   .guides__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .brands__grid li { flex-basis: calc(100% / 4); }
   .foot__top { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .crew__card { flex-basis: calc((100% - 24px) / 2); }
 }
 
 /* ---------- Phones ---------- */
@@ -405,6 +422,9 @@ main:has(> :last-child:is(.salon, .team, .band)) + .foot { margin-top: 0; }
   .feature { border-radius: var(--radius); margin-inline: var(--gutter); width: auto; }
   .feature__img { min-height: 220px; }
   .why__list svg { width: 56px; height: 56px; }
+  .crew__card { flex-basis: 100%; }
+  .crew__img img { aspect-ratio: 1; object-position: 50% 20%; }
+  .crew__body { padding: 18px 18px 22px; }
   .brands__grid li { flex-basis: calc(100% / 3); min-height: 72px; padding: 8px; }
   .brands__grid img { max-height: 44px; width: auto; }
   .guides__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
