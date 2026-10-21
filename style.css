@@ -190,11 +190,11 @@ svg { flex: none; }
 .why { padding-block: clamp(56px, 7vw, 96px); }
 .why .h2 { margin-bottom: 36px; }
 .why__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
-.why__list li { display: flex; gap: 16px; align-items: flex-start; }
-.why__list svg { width: 44px; height: 44px; padding: 9px; border-radius: 50%; background: var(--surface-2); color: var(--primary); }
-.why__list h3 { font-size: var(--step-1); margin-bottom: 4px; }
-.why__list p { color: var(--text-muted); font-size: var(--step--1); margin-bottom: 6px; }
-.why__list a { color: var(--primary); font-weight: 600; font-size: var(--step--1); }
+.why__list li { display: flex; gap: 20px; align-items: center; }
+.why__list svg { width: 76px; height: 76px; fill: currentColor; color: var(--primary); }
+.why__list h3 { font-size: var(--step-1); line-height: 1.25; margin-bottom: 4px; }
+.why__list p { color: var(--text-muted); font-size: var(--step--1); line-height: 1.5; margin-bottom: 4px; }
+.why__list a { color: var(--primary); font-weight: 400; text-underline-offset: .25em; }
 
 /* Category tiles */
 .cats__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -251,10 +251,11 @@ svg { flex: none; }
 /* Brands */
 .brands { padding-block: clamp(56px, 7vw, 96px) 0; }
 .brands .h2 { margin-bottom: 28px; }
-.brands__grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
-.brands__grid a, .brands__grid span { display: grid; place-items: center; min-height: 84px; padding: 12px; border-radius: var(--radius); border: 1px solid var(--divider); font-weight: 600; text-align: center; text-decoration: none; }
-.brands__grid a { color: var(--primary); border-color: var(--primary); }
-.brands__grid a:hover { background: var(--primary); color: var(--on-primary); }
+.brands__grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 0; margin-bottom: 18px; }
+.brands__grid li { display: grid; place-items: center; flex: 0 0 calc(100% / 6); min-height: 104px; padding: 12px; }
+.brands__grid img { max-width: 100%; height: auto; }
+.brands__grid a { display: grid; place-items: center; border-radius: var(--radius-s); transition: opacity .18s var(--ease); }
+.brands__grid a:hover { opacity: .65; }
 
 /* Guides */
 .guides { padding-block: clamp(56px, 7vw, 96px); }
@@ -360,7 +361,7 @@ svg { flex: none; }
   .steps__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .team__grid { grid-template-columns: minmax(0, 1fr); }
   .guides__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .brands__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .brands__grid li { flex-basis: calc(100% / 4); }
 }
 
 /* ---------- Phones ---------- */
@@ -394,7 +395,9 @@ svg { flex: none; }
   .feature--rev .feature__img { order: 0; }
   .feature { border-radius: var(--radius); margin-inline: var(--gutter); width: auto; }
   .feature__img { min-height: 220px; }
-  .brands__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .why__list svg { width: 56px; height: 56px; }
+  .brands__grid li { flex-basis: calc(100% / 3); min-height: 72px; padding: 8px; }
+  .brands__grid img { max-height: 44px; width: auto; }
   .guides__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .facts div { grid-template-columns: 6.5rem minmax(0, 1fr); }
   .foot__top, .foot__cols { grid-template-columns: minmax(0, 1fr); }
